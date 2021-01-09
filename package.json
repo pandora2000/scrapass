@@ -1,0 +1,14 @@
+{
+  "name": "scrapass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scrapass.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
