@@ -27,7 +27,7 @@ function timeout (ms, funcOnTimeout, { driver, headless, resolve, reject }) {
   return retFunc
 }
 function main () {
-  const { modulePath, exportedName, headless } = JSON.parse(process.argv[2])
+  const { modulePath, exportedName, headless, argument } = JSON.parse(process.argv[2])
   const mod = require(modulePath)
   let func
   if (exportedName) {
@@ -44,7 +44,7 @@ function main () {
     const to = (ms, funcOnTimeout) => {
       return timeout(ms, funcOnTimeout, { driver, headless, resolve, reject })
     }
-    const res = await func({ driver, timeout: to })
+    const res = await func({ driver, timeout: to, argument })
     resolve(res)
   }).then(r => {
     return { result: r }

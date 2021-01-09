@@ -1,10 +1,9 @@
-// 使い方: test/test.jsを見てね
 const { fork } = require('child_process')
-function main({ modulePath, exportedName, headless }) {
+function main({ modulePath, exportedName, headless, argument }) {
   return new Promise((resolve, reject) => {
     const worker = fork(
       `${__dirname}/worker.js`,
-      [JSON.stringify({ modulePath, exportedName, headless })]
+      [JSON.stringify({ modulePath, exportedName, headless, argument })]
     )
     let message
     worker.on('message', mes => {

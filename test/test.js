@@ -1,4 +1,3 @@
-// メリット: driverのquit、xvfbの前後処理を自動でやってくれる。timeout処理を行え、timeoutによって残るゾンビプロミスが、適切に削除される（別プロセスで実行しプロセスごと終わるため）
 const { strict: assert } = require('assert')
 const scrapass = require('../scrapass')
 function sleep (ms) {
@@ -28,6 +27,9 @@ async function scrape6({ timeout, driver }) {
   await sleep(100 * 1000)
   return 'scrape6n'
 }
+async function scrape7({ timeout, driver, argument }) {
+  return argument
+}
 async function main() {
   console.log('scrape1')
   const r1 = await scrapass({ modulePath: __filename, exportedName: 'scrape1', headless: true })
@@ -53,8 +55,11 @@ async function main() {
   console.log('scrape6')
   const r6 = await scrapass({ modulePath: __filename, exportedName: 'scrape6', headless: false })
   assert.equal(r6, 'scrape6')
+  console.log('scrape7')
+  const r7 = await scrapass({ modulePath: __filename, exportedName: 'scrape7', headless: false, argument: 'scrape7' })
+  assert.equal(r7, 'scrape7')
 }
-module.exports = { scrape1, scrape2, scrape3, scrape5, scrape6 }
+module.exports = { scrape1, scrape2, scrape3, scrape5, scrape6, scrape7 }
 if (require.main === module) {
   main()
 }
