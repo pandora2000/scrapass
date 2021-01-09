@@ -20,7 +20,13 @@ function timeout (ms, funcOnTimeout, { driver, headless, resolve, reject }) {
   }
   sleep(ms).then(async () => {
     if (!inTime) {
-      await funcOnTimeout(resolve)
+      if (funcOnTimeout) {
+        try {
+          await funcOnTimeout(resolve, reject)
+        } catch (e) {
+          reject(e)
+        }
+      }
       reject(new Error('timeout'))
     }
   })
@@ -44,8 +50,12 @@ function main () {
     const to = (ms, funcOnTimeout) => {
       return timeout(ms, funcOnTimeout, { driver, headless, resolve, reject })
     }
-    const res = await func({ driver, timeout: to, argument })
-    resolve(res)
+    try {
+      const res = await func({ driver, timeout: to, argument })
+      resolve(res)
+    } catch (e) {
+      reject(e)
+    }
   }).then(r => {
     return { result: r }
   }, e => {
@@ -53,7 +63,9 @@ function main () {
   }).then(async r => {
     await quit({ driver, headless })
     process.send(r)
-    process.exit()
+    while (true) {
+      await sleep(10000 * 1000)
+    }
   })
 }
 main()

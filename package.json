@@ -15,6 +15,7 @@
   "dependencies": {
     "geckodriver": "^1.21.1",
     "selenium-webdriver": "^4.0.0-alpha.8",
+    "tree-kill": "^1.2.2",
     "xvfb": "^0.4.0"
   }
 }
