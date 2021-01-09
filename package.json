@@ -1,7 +1,7 @@
 {
   "name": "scrapass",
   "version": "1.2.0",
-  "description": "Scraping utility, managing web driver and xvfb, and timeout. Executing in subprocess makes zombie-Promise made by timeout quit cleanly.",
+  "description": "Wrapping your scraping function, quit web driver and xvfb cleanly. Additionally, you can use timeout.",
   "main": "scrapass.js",
   "directories": {
     "test": "test"
