@@ -9,7 +9,8 @@
   "scripts": {
     "test": "node test/test.js"
   },
-  "author": "",
+  "repository": "github:pandora2000/scrapass",
+  "author": "Tetsuri Moriya",
   "license": "ISC",
   "dependencies": {
     "geckodriver": "^1.21.1",
