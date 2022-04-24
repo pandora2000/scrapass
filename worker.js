@@ -1,4 +1,4 @@
-require('geckodriver')
+require('chromedriver')
 const { Builder } = require('selenium-webdriver')
 const Xvfb = require('xvfb')
 const xvfb = new Xvfb()
@@ -46,7 +46,7 @@ function main () {
     if (headless) {
       xvfb.startSync()
     }
-    driver = await new Builder().forBrowser('firefox').build()
+    driver = await new Builder().forBrowser('chrome').build()
     const to = (ms, funcOnTimeout) => {
       return timeout(ms, funcOnTimeout, { driver, headless, resolve, reject })
     }
